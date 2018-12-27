@@ -5,6 +5,7 @@ __date__ = "$2018-12-27 9:09:27$"
 from widgets import *
 
 root=mainWidget()
+
 root.mainloop()
 
 
