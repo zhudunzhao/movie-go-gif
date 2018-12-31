@@ -1,11 +1,6 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
-# To change this license header, choose License Headers in Project Properties.
-# To change this template file, choose Tools | Templates
-# and open the template in the editor.
 
-__author__ = "zhudu"
-__date__ = "$2018-12-27 18:06:50$"
 
 # 导入tkinter包，为其定义别名tk
 import Tkinter as tk
