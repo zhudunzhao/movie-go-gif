@@ -5,7 +5,7 @@
 import Tkinter as tk
 # 弹出
 import tkMessageBox as mb
-import tkFileDialog 
+import tkFileDialog as td
 import re #正则
 
 
@@ -31,9 +31,11 @@ class GIF(object):
     # 布局
     def main(self):
         root=self.widget()
+        path=tk.StringVar()
         #第一行
         tk.Label(root,text='选择文件').grid(row=0)
-        Button(root, text = "路径选择", command = self.selectPath).grid(row = 0, column = 2,sticky=E+W)
+        tk.Entry(root,textvariable=self.source).grid(row=0,column=1,sticky=tk.E)
+        tk.Button(root, text = "路径选择", command = self.selectPath).grid(row = 0, column = 3,sticky=tk.E+tk.W)
         #第二行
         tk.Label(root,text='转换类型').grid(row=1)
 
@@ -41,8 +43,9 @@ class GIF(object):
         root.mainloop()
 
     #选择文件
-    def selectPath():
-        path_ = tkFileDialog.askopenfilename(filetypes=[("bmp格式".decode('gbk'),"py")])
+    def selectPath(self):
+        path_ = td.askopenfilename()
+        print path_
 
     def toGif():
         return 
