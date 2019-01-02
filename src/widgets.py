@@ -17,8 +17,8 @@ class GIF(object):
         self.width=width
         self.height=height
         self.fps=fps
-
-        # mb.showinfo("welcome","Welcome Message")
+        self.is_ffmpeg()
+        
 
     # 窗体
     def widget(self):
@@ -47,8 +47,8 @@ class GIF(object):
         path_ = td.askopenfilename()
         print path_
 
-    def toGif():
-        return 
+    def is_ffmpeg(self):
+        mb.showinfo("welcome","Welcome Message")
 
 if __name__ == "__main__":
     g=GIF()
