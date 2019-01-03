@@ -9,38 +9,33 @@ import tkFileDialog as td
 import re #正则
 
 
-class GIF(object):
+class Application(tk.Frame):
 
-    def __init__(self,source=None,target=None,width=0,height=0,fps=0):
+    def __init__(self,master=None,source=None,target=None,width=0,height=0,fps=0):
+        tk.Frame.__init__(self,master)
+        # 参数
         self.source=source
         self.target=target
         self.width=width
         self.height=height
         self.fps=fps
-        self.is_ffmpeg()
+        # 显示窗口，并使用grid布局
+        self.grid(row=0)
+        # 创建控件
+        self.main()
         
 
-    # 窗体
-    def widget(self):
-        root = tk.Tk()
-        root.title('Movie to GIF')#title
-        root.geometry('480x200')#widget size
-        root.resizable(width=False, height=True) 
-        return root
-
+   
     # 布局
     def main(self):
-        root=self.widget()
-        path=tk.StringVar()
-        #第一行
-        tk.Label(root,text='选择文件').grid(row=0)
-        tk.Entry(root,textvariable=self.source).grid(row=0,column=1,sticky=tk.E)
-        tk.Button(root, text = "路径选择", command = self.selectPath).grid(row = 0, column = 3,sticky=tk.E+tk.W)
+        # 第一行
+        tk.Label(self,text='选择文件').grid(row=0)
+        tk.Entry(self,textvariable=self.source).grid(row=0,column=1,sticky=tk.E)
+        tk.Button(self, text = "路径选择", command = self.selectPath).grid(row = 0, column = 3,sticky=tk.E+tk.W)
         #第二行
-        tk.Label(root,text='转换类型').grid(row=1)
-
-        #主体循环
-        root.mainloop()
+        tk.Label(self,text='尺寸').grid(row=1)
+        tk.Entry(self,textvariable=self.source).grid(row=1,column=1,sticky=tk.E)
+       
 
     #选择文件
     def selectPath(self):
@@ -51,6 +46,10 @@ class GIF(object):
         mb.showinfo("welcome","Welcome Message")
 
 if __name__ == "__main__":
-    g=GIF()
-    g.main()
+    # 创建一个Application对象app
+    app = Application()
+    # 设置窗口标题为'Movie to GIF'
+    app.master.title = 'Movie to GIF'
+    # 主循环开始
+    app.mainloop()
     
