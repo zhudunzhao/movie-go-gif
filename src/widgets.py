@@ -38,7 +38,7 @@ class Application(tk.Frame):
         # 第一行(选择文件)
         tk.Label(self,text='选择文件:').grid(row=0)
         self.getsource=tk.Entry(self,textvariable=source).grid(row=0,column=1,columnspan=2,sticky=tk.E+tk.W)
-        tk.Button(self, text = "路径选择", command = self.selectPath).grid(row = 0, column = 3,sticky=tk.E+tk.W)
+        tk.Button(self, text = "路径选择",bg='blue', command = self.selectPath).grid(row = 0, column = 3,sticky=tk.E+tk.W)
         #第二行（高宽）
         tk.Label(self,text='尺寸:').grid(row=1)
         tk.Entry(self,textvariable=width).grid(row=1,column=1,sticky=tk.E)
@@ -70,7 +70,7 @@ class Application(tk.Frame):
     def selectPath(self):
 
         self.file_opt = options = {}
-        options['filetypes'] = [('视频文件', '*.mp4;*.swf;*.avi;*.wma;*.rm;*.mov'),('所有文件', '.*')]
+        #options['filetypes'] = [('视频文件', '*.mp4;*.swf;*.avi;*.wma;*.rm;*.mov'),('所有文件', '.*')]
         options['title'] = '选择视频文件'
 
         path_ = td.askopenfilename(**self.file_opt)
