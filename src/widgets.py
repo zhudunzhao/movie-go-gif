@@ -53,7 +53,7 @@ class Application(tk.Frame):
         
     # 提交处理
     def done(self):
-        
+        pass
 
     #选择文件
     def selectPath(self):
