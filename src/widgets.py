@@ -59,7 +59,6 @@ class Application(tk.Frame):
         fps.set(self.fps)
         width.set(self.width)
         height.set(self.height)
-        print self.fps
 
         
     # 提交处理
@@ -96,7 +95,7 @@ if __name__ == "__main__":
     # 设置窗口标题为'Movie to GIF'
     app.master.title('Movie to GIF')
     # 设置默认值
-    app.fps=1000
+    app.fps=60
     # 主循环开始
     app.mainloop()
     
