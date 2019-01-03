@@ -7,6 +7,7 @@ import Tkinter as tk
 import tkMessageBox as mb
 import tkFileDialog as td
 import re #正则
+import os
 
 
 class Application(tk.Frame):
@@ -19,11 +20,20 @@ class Application(tk.Frame):
         self.width=width
         self.height=height
         self.fps=fps
+        self.f2=tk.Frame(width=100,height=500,bg='blue')
+        self.f2.grid(row=1)
+        self.f2.grid_propagate(0) #固定组件大小
         
         # 显示窗口，并使用grid布局
         self.grid(row=0)
+        self.height=500
+        self.width=500
+        self.bg='blue'
+        # self.grid_propagate(0)
+        
         # 创建控件
         self.main()
+        
         
    
     # 布局
@@ -63,8 +73,10 @@ class Application(tk.Frame):
         
     # 提交处理
     def done(self):
-        source=self.getsource.get()
-        print source
+        ffmpeg=os.system("ffmpeg -version")
+        var= "g:" + str(ffmpeg)
+        mb.showinfo("welcome",var)
+        
 
     #选择文件
     def selectPath(self):
@@ -96,6 +108,7 @@ if __name__ == "__main__":
     app.master.title('Movie to GIF')
     # 设置默认值
     app.fps=60
+
     # 主循环开始
     app.mainloop()
     
