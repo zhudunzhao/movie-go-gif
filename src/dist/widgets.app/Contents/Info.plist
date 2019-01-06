@@ -60,21 +60,20 @@
 		<false/>
 	</dict>
 	<key>PyResourcePackages</key>
-	<array>
-	</array>
+	<array/>
 	<key>PyRuntimeLocations</key>
 	<array>
-		<string>@executable_path/../Frameworks/Python.framework/Versions/2.7/Python</string>
+		<string>@executable_path/../Frameworks/Python.framework/Versions/3.7/Python</string>
 	</array>
 	<key>PythonInfoDict</key>
 	<dict>
 		<key>PythonExecutable</key>
-		<string>/usr/local/opt/python@2/bin/python2.7</string>
+		<string>/usr/local/opt/python/bin/python3.7</string>
 		<key>PythonLongVersion</key>
-		<string>2.7.15 (default, Nov 27 2018, 21:24:58) 
-[GCC 4.2.1 Compatible Apple LLVM 10.0.0 (clang-1000.11.45.5)]</string>
+		<string>3.7.2 (default, Dec 27 2018, 07:35:06) 
+[Clang 10.0.0 (clang-1000.11.45.5)]</string>
 		<key>PythonShortVersion</key>
-		<string>2.7</string>
+		<string>3.7</string>
 		<key>py2app</key>
 		<dict>
 			<key>alias</key>

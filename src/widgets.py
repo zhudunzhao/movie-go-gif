@@ -2,33 +2,28 @@
 # _*_ coding:utf-8 _*_
 
 
-import Tkinter as tk
-# 弹出
-import tkMessageBox as mb
-import tkFileDialog as td
+import tkinter as tk
+from tkinter import ttk #ttk新gui
+import tkinter.messagebox as mb #弹窗库
+import tkinter.filedialog as td  #选择器
 import re #正则
 import os
 
 
-class Application(tk.Frame):
+class Application(ttk.Frame):
 
     def __init__(self,master=None,source='',target='',height=600,width=800,fps=60):
-        tk.Frame.__init__(self,master)
+        ttk.Frame.__init__(self,master)
         # 参数
         self.source=source
         self.target=target
         self.width=width
         self.height=height
         self.fps=fps
-        self.f2=tk.Frame(width=100,height=500,bg='blue')
-        self.f2.grid(row=1)
-        self.f2.grid_propagate(0) #固定组件大小
+ 
         
         # 显示窗口，并使用grid布局
         self.grid(row=0)
-        self.height=500
-        self.width=500
-        self.bg='blue'
         # self.grid_propagate(0)
         
         # 创建控件
@@ -46,22 +41,22 @@ class Application(tk.Frame):
         fps=tk.StringVar()
 
         # 第一行(选择文件)
-        tk.Label(self,text='选择文件:').grid(row=0)
-        self.getsource=tk.Entry(self,textvariable=source).grid(row=0,column=1,columnspan=2,sticky=tk.E+tk.W)
-        tk.Button(self, text = "路径选择",bg='blue', command = self.selectPath).grid(row = 0, column = 3,sticky=tk.E+tk.W)
+        ttk.Label(self,text='选择文件:').grid(row=0)
+        self.getsource=ttk.Entry(self,textvariable=source).grid(row=0,column=1,columnspan=2,sticky=tk.E+tk.W)
+        ttk.Button(self, text = "路径选择", command = self.selectPath).grid(row = 0, column = 3,sticky=tk.E+tk.W)
         #第二行（高宽）
-        tk.Label(self,text='尺寸:').grid(row=1)
-        tk.Entry(self,textvariable=width).grid(row=1,column=1,sticky=tk.E)
-        tk.Entry(self,textvariable=height).grid(row=1,column=2,sticky=tk.E)
+        ttk.Label(self,text='尺寸:').grid(row=1)
+        ttk.Entry(self,textvariable=width).grid(row=1,column=1,sticky=tk.E)
+        ttk.Entry(self,textvariable=height).grid(row=1,column=2,sticky=tk.E)
         # 第三行（fps）
-        tk.Label(self,text='fps:').grid(row=2)
-        tk.Entry(self,textvariable=fps).grid(row=2,column=1,columnspan=2,sticky=tk.E+tk.W)
+        ttk.Label(self,text='fps:').grid(row=2)
+        ttk.Entry(self,textvariable=fps).grid(row=2,column=1,columnspan=2,sticky=tk.E+tk.W)
         #第四行(保存路径)
-        tk.Label(self,text='保存路径:').grid(row=3)
-        tk.Entry(self,textvariable=target).grid(row=3,column=1,columnspan=2,sticky=tk.E+tk.W)
-        tk.Button(self, text = "路径选择", command = self.savePath).grid(row = 3, column = 3,sticky=tk.E+tk.W)
+        ttk.Label(self,text='保存路径:').grid(row=3)
+        ttk.Entry(self,textvariable=target).grid(row=3,column=1,columnspan=2,sticky=tk.E+tk.W)
+        ttk.Button(self, text = "路径选择", command = self.savePath).grid(row = 3, column = 3,sticky=tk.E+tk.W)
         #第四行(保存按钮)
-        tk.Button(self, text = "路径选择", command = self.done).grid(row = 4,column=1, columnspan = 2,sticky=tk.E+tk.W)
+        ttk.Button(self, text = "生成", command = self.done).grid(row = 4,column=1, columnspan = 2,sticky=tk.E+tk.W)
 
         #设置默认值
         source.set(self.source)
@@ -75,7 +70,7 @@ class Application(tk.Frame):
     def done(self):
         ffmpeg=os.system("ffmpeg -version")
         var= "g:" + str(ffmpeg)
-        mb.showinfo("welcome",var)
+        mb.showinfo('提示',var)
         
 
     #选择文件
@@ -98,7 +93,7 @@ class Application(tk.Frame):
         self.target.set(path_)
     #检测组件
     def is_ffmpeg(self):
-        mb.showinfo("welcome","Welcome Message")
+        pass
     
 
 if __name__ == "__main__":

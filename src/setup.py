@@ -7,7 +7,7 @@ Usage:
 
 from setuptools import setup
 
-APP = ['/Users/zhudunzhao/Documents/GitHub/movie-go-gif/src/widgets.py']
+APP = ['widgets.py']
 DATA_FILES = []
 OPTIONS = {}
 
