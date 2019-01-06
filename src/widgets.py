@@ -6,6 +6,7 @@ import tkinter as tk
 from tkinter import ttk #ttk新gui
 import tkinter.messagebox as mb #弹窗库
 import tkinter.filedialog as td  #选择器
+from tkinter import scrolledtext #滚动
 import re #正则
 import os
 
@@ -58,6 +59,12 @@ class Application(ttk.Frame):
         #第四行(保存按钮)
         ttk.Button(self, text = "生成", command = self.done).grid(row = 4,column=1, columnspan = 2,sticky=tk.E+tk.W)
 
+        #第五行（信息输出区）
+        ttk.Label(self,text='信息输出').grid(row=5)
+        src=scrolledtext.ScrolledText(self).grid(column=0, row=6, sticky='WE', columnspan=4)
+        src.insert(tk.INSERT, '123\n')
+        
+
         #设置默认值
         source.set(self.source)
         target.set(self.target)
@@ -71,6 +78,23 @@ class Application(ttk.Frame):
         ffmpeg=os.system("ffmpeg -version")
         var= "g:" + str(ffmpeg)
         mb.showinfo('提示',var)
+
+        result = os.popen('ffmpeg -version')
+        res = result.read()
+        for line in res.splitlines():
+                #mb.showinfo('提示',line)
+                pass
+        
+        p = subprocess.Popen('ps aux',shell=True,stdout=subprocess.PIPE)
+        out,err = p.communicate()
+        for line2 in out.splitlines():
+            print(line2)
+ 
+
+
+ 
+
+
         
 
     #选择文件

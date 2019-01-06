@@ -71,6 +71,14 @@ class Application(ttk.Frame):
         ffmpeg=os.system("ffmpeg -version")
         var= "g:" + str(ffmpeg)
         mb.showinfo('提示',var)
+
+        result = os.popen('ffmpeg -version')
+        res = result.read()
+        for line in res.splitlines():
+                mb.showinfo('提示',line)
+ 
+
+
         
 
     #选择文件
