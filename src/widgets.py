@@ -9,6 +9,7 @@ import tkinter.filedialog as td  #选择器
 from tkinter import scrolledtext #滚动
 import re #正则
 import os
+from ffmpy import FFmpeg as ff
 
 
 class Application(ttk.Frame):
@@ -16,11 +17,17 @@ class Application(ttk.Frame):
     def __init__(self,master=None,source='',target='',height=600,width=800,fps=60):
         ttk.Frame.__init__(self,master)
         # 参数
-        self.source=source
-        self.target=target
-        self.width=width
-        self.height=height
-        self.fps=fps
+        self.source=tk.StringVar()
+        self.target=tk.StringVar()
+        self.width=tk.StringVar()
+        self.height=tk.StringVar()
+        self.fps=tk.StringVar()
+        #设置
+        self.source.set(source)
+        self.target.set(target)
+        self.width.set(width)
+        self.height.set(height)
+        self.fps.set(fps)
  
         
         # 显示窗口，并使用grid布局
@@ -34,68 +41,60 @@ class Application(ttk.Frame):
    
     # 布局
     def main(self):
-        # 初始化字段
-        source=tk.StringVar()
-        target=tk.StringVar()
-        width=tk.StringVar()
-        height=tk.StringVar()
-        fps=tk.StringVar()
 
         # 第一行(选择文件)
         ttk.Label(self,text='选择文件:').grid(row=0)
-        self.getsource=ttk.Entry(self,textvariable=source).grid(row=0,column=1,columnspan=2,sticky=tk.E+tk.W)
+        self.getsource=ttk.Entry(self,textvariable=self.source)
+        self.getsource.grid(row=0,column=1,columnspan=2,sticky=tk.E+tk.W)
         ttk.Button(self, text = "路径选择", command = self.selectPath).grid(row = 0, column = 3,sticky=tk.E+tk.W)
         #第二行（高宽）
         ttk.Label(self,text='尺寸:').grid(row=1)
-        ttk.Entry(self,textvariable=width).grid(row=1,column=1,sticky=tk.E)
-        ttk.Entry(self,textvariable=height).grid(row=1,column=2,sticky=tk.E)
+        ttk.Entry(self,textvariable=self.width).grid(row=1,column=1,sticky=tk.E+tk.W)
+        ttk.Entry(self,textvariable=self.height).grid(row=1,column=2,sticky=tk.E+tk.W)
         # 第三行（fps）
         ttk.Label(self,text='fps:').grid(row=2)
-        ttk.Entry(self,textvariable=fps).grid(row=2,column=1,columnspan=2,sticky=tk.E+tk.W)
+        ttk.Entry(self,textvariable=self.fps).grid(row=2,column=1,columnspan=2,sticky=tk.E+tk.W)
         #第四行(保存路径)
         ttk.Label(self,text='保存路径:').grid(row=3)
-        ttk.Entry(self,textvariable=target).grid(row=3,column=1,columnspan=2,sticky=tk.E+tk.W)
+        ttk.Entry(self,textvariable=self.target).grid(row=3,column=1,columnspan=2,sticky=tk.E+tk.W)
         ttk.Button(self, text = "路径选择", command = self.savePath).grid(row = 3, column = 3,sticky=tk.E+tk.W)
         #第四行(保存按钮)
         ttk.Button(self, text = "生成", command = self.done).grid(row = 4,column=1, columnspan = 2,sticky=tk.E+tk.W)
 
         #第五行（信息输出区）
-        ttk.Label(self,text='信息输出').grid(row=5)
-        src=scrolledtext.ScrolledText(self).grid(column=0, row=6, sticky='WE', columnspan=4)
-        src.insert(tk.INSERT, '123\n')
-        
-
-        #设置默认值
-        source.set(self.source)
-        target.set(self.target)
-        fps.set(self.fps)
-        width.set(self.width)
-        height.set(self.height)
+        ttk.Label(self,text='信息输出:').grid(row=5,sticky=tk.W)
+        self.scr=scrolledtext.ScrolledText(self,height=10 ,wrap=tk.WORD)
+        self.scr.grid(column=0, row=6, sticky='WE', columnspan=4)
+         
 
         
     # 提交处理
     def done(self):
-        ffmpeg=os.system("ffmpeg -version")
-        var= "g:" + str(ffmpeg)
-        mb.showinfo('提示',var)
+        
+        
+        
 
         result = os.popen('ffmpeg -version')
         res = result.read()
         for line in res.splitlines():
                 #mb.showinfo('提示',line)
-                pass
+                self.scr.insert(tk.END, str(line)+'\n')
+                
+        self.scr.insert(tk.END, str('==========完成=====================================')+'\n')
+        self.scr.see(tk.END)
+
+    #安装ffmpeg
+    def installFF(self):
+        pass
+
+    #运行生成命令
+    def runGif(self):
+        #生成画版
+        self.scr.insert(tk.END, str('===生成画版=====================================')+'\n')
+        cmd1='ffmpeg -i '+User+' -vf fps='+fps+',scale='+Width+':'+height+':flags=lanczos,palettegen -y '+randmo+'.png'
         
-        p = subprocess.Popen('ps aux',shell=True,stdout=subprocess.PIPE)
-        out,err = p.communicate()
-        for line2 in out.splitlines():
-            print(line2)
- 
+        #生成gif
 
-
- 
-
-
-        
 
     #选择文件
     def selectPath(self):
@@ -125,8 +124,7 @@ if __name__ == "__main__":
     app = Application()
     # 设置窗口标题为'Movie to GIF'
     app.master.title('Movie to GIF')
-    # 设置默认值
-    app.fps=60
+
 
     # 主循环开始
     app.mainloop()
